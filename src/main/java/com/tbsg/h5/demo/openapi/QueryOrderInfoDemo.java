@@ -58,7 +58,7 @@ public class QueryOrderInfoDemo {
         request.setAlscOrderNos(alscOrderNos);
 
         request.setChannelLevel2("mobile.sdkdemo");
-        request.setChannelLevel3("mobile.ele.001");
+        request.setChannelLevel3("mobile.sdkdemo.001");
 
         try {
             ChannelOrderInfoResponse response = allianceService.queryOrderInfo(request);
