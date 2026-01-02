@@ -1,0 +1,410 @@
+/* ============================================
+   淘宝闪购渠道H5 - 公共样式文件
+   2025 设计风格 - 玻璃拟态 & 液态效果
+   ============================================ */
+
+/* CSS 变量定义 */
+:root {
+    /* ============================================
+       Ant Design 标准色彩系统 + 橙色主题
+       ============================================ */
+
+    /* 主色调 - 橙色渐变系统 */
+    --primary-gradient: linear-gradient(135deg, #FF6B35 0%, #FF8E53 50%, #FFA726 100%);
+    --primary-color: #FF6B35;
+    --primary-light: #FF8E53;
+    --primary-dark: #E65100;
+    --primary-hover: #FF8E53;
+    --primary-active: #E65100;
+
+    /* Ant Design 标准辅助色 */
+    --success-color: #52C41A;
+    --success-light: #73D13D;
+    --success-dark: #389E0D;
+    --warning-color: #FAAD14;
+    --warning-light: #FFC53D;
+    --warning-dark: #D48806;
+    --error-color: #FF4D4F;
+    --error-light: #FF7875;
+    --error-dark: #CF1322;
+    --info-color: #1890FF;
+    --info-light: #40A9FF;
+    --info-dark: #096DD9;
+
+    /* Ant Design 标准中性色系统 */
+    --text-primary: rgba(0, 0, 0, 0.85);
+    --text-secondary: rgba(0, 0, 0, 0.65);
+    --text-tertiary: rgba(0, 0, 0, 0.45);
+    --text-disabled: rgba(0, 0, 0, 0.25);
+    --bg-color: #F0F2F5;
+    --bg-secondary: #FAFAFA;
+    --card-bg: #FFFFFF;
+    --border-color: #D9D9D9;
+    --border-light: #F0F0F0;
+
+    /* Ant Design 标准阴影层级 */
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.12);
+    --shadow-xl: 0 12px 24px rgba(0, 0, 0, 0.16);
+    --shadow-float: 0 8px 32px rgba(255, 107, 53, 0.25);
+    --shadow-float-hover: 0 12px 40px rgba(255, 107, 53, 0.35);
+
+    /* 圆角规范（保持 2025 风格，略大于 Ant Design） */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 24px;
+
+    /* Ant Design 标准间距规范（8px 栅格系统） */
+    --spacing-xs: 8px;
+    --spacing-sm: 16px;
+    --spacing-md: 24px;
+    --spacing-lg: 32px;
+    --spacing-xl: 40px;
+    --spacing-xxl: 48px;
+
+    /* 玻璃拟态效果（保持 2025 风格） */
+    --glass-bg: rgba(255, 255, 255, 0.95);
+    --glass-bg-secondary: rgba(255, 255, 255, 0.85);
+    --glass-bg-tertiary: rgba(255, 255, 255, 0.75);
+    --glass-border: rgba(255, 255, 255, 0.3);
+    --glass-blur: blur(20px);
+    --glass-blur-strong: blur(30px);
+
+    /* Ant Design 标准动画缓动函数 */
+    --ease-in: cubic-bezier(0.55, 0, 1, 0.45);
+    --ease-out: cubic-bezier(0, 0, 0.2, 1);
+    --ease-in-out: cubic-bezier(0.645, 0.045, 0.355, 1);
+    --ease-out-back: cubic-bezier(0.12, 0.4, 0.29, 1.46);
+    --ease-in-back: cubic-bezier(0.71, -0.46, 0.88, 0.6);
+    --ease-in-out-back: cubic-bezier(0.71, -0.46, 0.29, 1.46);
+    --ease-out-circ: cubic-bezier(0.08, 0.82, 0.17, 1);
+    --ease-in-circ: cubic-bezier(0.6, 0.04, 0.98, 0.34);
+    --ease-in-out-circ: cubic-bezier(0.78, 0.14, 0.15, 0.86);
+
+    /* Ant Design 标准动画时长 */
+    --duration-fast: 0.1s;
+    --duration-base: 0.2s;
+    --duration-slow: 0.3s;
+    --duration-slower: 0.5s;
+}
+
+/* 全局重置样式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body, html {
+    height: 100%;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    color: var(--text-primary);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+}
+
+/* 通用按钮基础样式（Ant Design 标准） */
+.button-base {
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all var(--duration-base) var(--ease-in-out);
+    outline: none;
+    user-select: none;
+    -webkit-user-select: none;
+    height: 40px;
+    padding: 0 var(--spacing-sm);
+    border-radius: var(--radius-sm);
+}
+
+.button-base:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.05);
+}
+
+.button-base:active {
+    transform: scale(0.98);
+}
+
+.button-base:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    transform: none !important;
+    filter: grayscale(0.5);
+}
+
+/* 提示框样式（Ant Design 标准） */
+.alert {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.9);
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--radius-md);
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+    z-index: 2000;
+    box-shadow: var(--shadow-lg);
+    animation: alertIn var(--duration-slow) var(--ease-out-back) forwards;
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    background: rgba(0, 0, 0, 0.85);
+    max-width: 80%;
+    text-align: center;
+}
+
+.alert.success {
+    background: rgba(82, 196, 26, 0.95);
+}
+
+.alert.error {
+    background: rgba(255, 77, 79, 0.95);
+}
+
+.alert.warning {
+    background: rgba(250, 173, 20, 0.95);
+}
+
+/* 加载动画容器 */
+.loading {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    z-index: 999;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.loading.active {
+    display: flex;
+}
+
+/* 旋转加载器 */
+.spinner {
+    width: 48px;
+    height: 48px;
+    border: 4px solid rgba(255, 107, 53, 0.15);
+    border-top: 4px solid var(--primary-color);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin-bottom: 16px;
+}
+
+.loading p {
+    color: var(--primary-color);
+    font-size: 15px;
+    font-weight: 500;
+}
+
+/* 隐藏类 */
+.hidden {
+    display: none !important;
+}
+
+/* ============================================
+   通用动画定义
+   ============================================ */
+
+/* 淡入动画（Ant Design 标准缓动） */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 使用 Ant Design 标准缓动函数的淡入 */
+.fade-in {
+    animation: fadeIn var(--duration-slow) var(--ease-out-circ);
+}
+
+/* 旋转动画 */
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* 浮动动画 */
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+/* 弹跳进入动画 */
+@keyframes bounceIn {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    70% {
+        transform: scale(0.9);
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* 提示框进入动画 */
+@keyframes alertIn {
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+/* 脉冲动画 */
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+/* 滑入动画 */
+@keyframes slideIn {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* 缩放进入动画 */
+@keyframes scaleIn {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* ============================================
+   Ripple 波纹点击效果
+   ============================================ */
+
+.ripple-effect {
+    position: relative;
+    overflow: hidden;
+}
+
+.ripple-effect::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    transform: translate(-50%, -50%);
+    transition: width var(--duration-slower) var(--ease-out-circ),
+                height var(--duration-slower) var(--ease-out-circ);
+}
+
+.ripple-effect:active::after {
+    width: 300px;
+    height: 300px;
+}
+
+/* ============================================
+   输入框焦点优化
+   ============================================ */
+
+input[type="text"],
+input[type="tel"],
+input[type="email"],
+input[type="password"],
+textarea {
+    transition: all var(--duration-base) var(--ease-in-out);
+    height: 40px;
+    padding: 0 var(--spacing-sm);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-color);
+}
+
+input[type="text"]:focus,
+input[type="tel"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(255, 107, 53, 0.1);
+}
+
+input[type="text"]:hover,
+input[type="tel"]:hover,
+input[type="email"]:hover,
+input[type="password"]:hover,
+textarea:hover {
+    border-color: var(--primary-hover);
+}
+
+/* 输入框占位符样式 */
+input::placeholder,
+textarea::placeholder {
+    color: var(--text-tertiary);
+    transition: color var(--duration-base) ease;
+}
+
+input:focus::placeholder,
+textarea:focus::placeholder {
+    color: var(--text-secondary);
+}
+
+/* ============================================
+   按钮禁用状态优化（Ant Design 标准）
+   ============================================ */
+
+button:disabled,
+.button-base:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    transform: none !important;
+    filter: grayscale(0.5);
+    pointer-events: none;
+}
+
+button:disabled::after,
+.button-base:disabled::after {
+    display: none;
+}

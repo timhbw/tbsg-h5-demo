@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../images/logo.png" type="image/x-icon">
+    <title>支付成功 - 淘宝闪购</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/redirect.css">
+</head>
+<body>
+    <div class="container">
+        <div class="success-icon">
+            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="50" cy="50" r="45" fill="rgba(255,255,255,0.3)" stroke="rgba(255,255,255,0.5)" stroke-width="3"/>
+                <path class="checkmark" d="M30 50 L45 65 L70 35" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            </svg>
+        </div>
+        <h1>支付成功</h1>
+        <p class="message">您的订单已支付成功</p>
+
+        <div class="redirect-info">
+            <p class="redirect-text">页面将在 <span class="countdown" id="countdown">3</span> 秒后自动跳转</p>
+        </div>
+
+        <p>
+            <a href="#" class="manual-link" id="manualLink">
+                立即跳转
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 16px; height: 16px; margin-left: 4px; vertical-align: middle;">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+            </a>
+        </p>
+    </div>
+
+    <script src="../js/common.js"></script>
+    <script src="../js/redirect.js"></script>
+</body>
+</html>

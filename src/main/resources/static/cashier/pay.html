@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../images/logo.png" type="image/x-icon">
+    <title>三方收银台 - 淘宝闪购渠道H5</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/pay.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>收银台</h1>
+            <p>淘宝闪购-渠道H5</p>
+        </div>
+
+        <div class="amount">
+            <div class="amount-label">支付金额</div>
+            <div class="amount-value">
+                <span class="amount-unit">¥</span><span id="payAmountYuan">0.00</span>
+            </div>
+        </div>
+
+        <div class="order-info">
+            <div class="order-item hidden" id="uidRow">
+                <span class="order-label">用户ID</span>
+                <span class="order-value" id="uid"></span>
+            </div>
+            <div class="order-item">
+                <span class="order-label">交易ID</span>
+                <span class="order-value" id="transactionId"></span>
+            </div>
+            <div class="order-item">
+                <span class="order-label">订单标题</span>
+                <span class="order-value" id="subject"></span>
+            </div>
+            <div class="order-item hidden" id="bodyRow">
+                <span class="order-label">订单描述</span>
+                <span class="order-value" id="body"></span>
+            </div>
+        </div>
+
+        <button class="pay-button ripple-effect" id="payButton">立即支付</button>
+
+        <div class="footer">
+            <p>本页面仅供演示使用</p>
+        </div>
+    </div>
+
+    <div class="loading" id="loading">
+        <div class="spinner"></div>
+        <p>支付处理中...</p>
+    </div>
+
+    <script src="../js/common.js"></script>
+    <script src="../js/pay.js"></script>
+</body>
+</html>

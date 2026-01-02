@@ -1,0 +1,62 @@
+# 通用配置（所有环境共享）
+# 使用方式：
+# - 开发环境：--spring.profiles.active=dev
+# - 生产环境：--spring.profiles.active=prod
+
+server:
+  servlet:
+    context-path: /api
+
+spring:
+  application:
+    name: tbsg-h5-demo
+
+  # 默认使用开发环境配置
+  profiles:
+    active: dev
+
+  # 数据库配置 - 通用设置
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 20
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+
+  # Redis 配置 - 通用设置
+  data:
+    redis:
+      timeout: 3000ms
+      lettuce:
+        pool:
+          max-active: 8
+          max-idle: 8
+          min-idle: 0
+          max-wait: -1ms
+
+# MyBatis Plus 配置
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      id-type: auto
+      logic-delete-field: deleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+  mapper-locations: classpath*:mapper/**/*.xml
+
+# 淘宝闪购相关配置
+tbsg:
+  bill:
+    storage-path: /tmp/tbsg/bills/
+
+aliyun:
+  oss:
+    endpoint: oss-cn-shanghai.aliyuncs.com
+    accessKeyId: XXXXXXXX
+    accessKeySecret: XXXXXXXX
+    bucketName: XXXXXXXX

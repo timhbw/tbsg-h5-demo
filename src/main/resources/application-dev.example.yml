@@ -1,0 +1,41 @@
+# 开发环境配置
+server:
+  port: 8099
+
+spring:
+  # 数据库配置 - 开发环境
+  datasource:
+    url: jdbc:mysql://localhost:3306/tbsg_h5_demo?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    username: root
+    password: XXXXXXXX
+
+# 淘宝闪购配置 - 开发环境
+tbsg:
+  pay:
+    code: SDKDEMO_OPENPAY
+    # 淘宝闪购平台的公钥（用于验证平台发来的请求签名）
+    platformPublicKey: XXXXXXXX
+    # 机构（商户）的私钥（用于给响应添加签名）
+    merchantPrivateKey: XXXXXXXX
+    cashierUrl: http://localhost:8099/api/cashier/pay.html
+    intermediateUrl: http://localhost:8099/api/cashier/redirect.html
+  
+  login:
+    openSiteSourceCode: sdkdemo
+    from: mobile.sdkdemo
+    welfare3pp: SDKDEMO_OPENPAY
+    consumerSecret: XXXXXXXX
+    # 开发环境白名单（更宽松）
+    allowedMobiles: 11405196411,11405206109
+
+# 日志配置 - 开发环境（详细日志）
+logging:
+  level:
+    root: INFO
+    com.tbsg.h5.demo: DEBUG
+    com.baomidou.mybatisplus: DEBUG
+    org.springframework.web: DEBUG
+  pattern:
+    console: '%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n'
+  file:
+    name: logs/tbsg-h5-demo-dev.log

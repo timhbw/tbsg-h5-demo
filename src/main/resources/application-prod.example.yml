@@ -1,0 +1,44 @@
+# 生产环境配置（Demo 项目 - 配置已内置）
+server:
+  port: 8099
+
+spring:
+  # 数据库配置 - 生产环境
+  datasource:
+    url: jdbc:mysql://XXXXXXXX:3306/tbsg_h5_demo?useSSL=false&serverTimezone=Asia/Shanghai&characterEncoding=utf8&allowPublicKeyRetrieval=true
+    username: tbsg_h5_demo
+    password: XXXXXXXX
+
+# 淘宝闪购配置 - 生产环境
+tbsg:
+  pay:
+    code: SDKDEMO_OPENPAY
+    # 淘宝闪购平台的公钥（用于验证平台发来的请求签名）
+    platformPublicKey: XXXXXXXX
+    # 机构（商户）的私钥（用于给响应添加签名）
+    merchantPrivateKey: XXXXXXXX
+    cashierUrl: https://xx.xxx.com/cashier/pay.html
+    intermediateUrl: https://xx.xxx.com/cashier/redirect.html
+
+  login:
+    openSiteSourceCode: sdkdemo
+    from: mobile.sdkdemo
+    welfare3pp: SDKDEMO_OPENPAY
+    consumerSecret: XXXXXXXX
+    # 生产环境白名单
+    allowedMobiles: 11405196411,11405206109
+
+# 日志配置 - 生产环境（精简日志）
+logging:
+  level:
+    root: WARN
+    com.tbsg.h5.demo: INFO
+    com.baomidou.mybatisplus: WARN
+    org.springframework.web: WARN
+  pattern:
+    console: '%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n'
+    file: '%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n'
+  file:
+    name: logs/tbsg-h5-demo-prod.log
+    max-size: 50MB
+    max-history: 90
