@@ -17,9 +17,9 @@ body::before {
     width: 200%;
     height: 200%;
     background:
-        radial-gradient(circle at 30% 50%, rgba(255, 142, 83, 0.4) 0%, transparent 50%),
-        radial-gradient(circle at 70% 50%, rgba(255, 167, 38, 0.3) 0%, transparent 50%),
-        radial-gradient(circle at 50% 80%, rgba(255, 107, 53, 0.3) 0%, transparent 40%);
+            radial-gradient(circle at 30% 50%, rgba(255, 142, 83, 0.4) 0%, transparent 50%),
+            radial-gradient(circle at 70% 50%, rgba(255, 167, 38, 0.3) 0%, transparent 50%),
+            radial-gradient(circle at 50% 80%, rgba(255, 107, 53, 0.3) 0%, transparent 40%);
     animation: gradientShift 12s ease infinite;
     pointer-events: none;
     z-index: 0;
@@ -33,7 +33,7 @@ body::after {
     width: 100%;
     height: 100%;
     background:
-        linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.03) 50%, transparent 70%);
+            linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.03) 50%, transparent 70%);
     animation: shimmerSweep 8s linear infinite;
     pointer-events: none;
     z-index: 0;
@@ -89,7 +89,7 @@ body::after {
     opacity: 0;
     transform: translateY(20px);
     transition: opacity var(--duration-slow) var(--ease-out),
-                transform var(--duration-slow) var(--ease-out);
+    transform var(--duration-slow) var(--ease-out);
 }
 
 .active-section {
@@ -120,9 +120,9 @@ body::after {
     justify-content: center;
     margin-bottom: var(--spacing-lg);
     box-shadow:
-        var(--shadow-lg),
-        0 0 60px rgba(255, 107, 53, 0.5),
-        0 0 100px rgba(255, 142, 83, 0.3);
+            var(--shadow-lg),
+            0 0 60px rgba(255, 107, 53, 0.5),
+            0 0 100px rgba(255, 142, 83, 0.3);
     /* 移除内发光 inset 0 0 20px rgba(255, 255, 255, 0.5) */
     animation: float 6s var(--ease-in-out) infinite, logoGlow 3s var(--ease-in-out) infinite;
     position: relative;
@@ -150,11 +150,13 @@ body::after {
     width: 200%;
     height: 200%;
     background: linear-gradient(45deg,
-        transparent,
-        rgba(255, 255, 255, 0.5),
-        transparent);
+    transparent,
+    rgba(255, 255, 255, 0.5),
+    transparent);
     transform: rotate(45deg);
     animation: shimmer 2s infinite;
+    z-index: 10;
+    pointer-events: none;
 }
 
 .logo::after {
@@ -162,9 +164,9 @@ body::after {
     position: absolute;
     inset: -2px;
     background: linear-gradient(45deg,
-        rgba(255, 107, 53, 0.5),
-        rgba(255, 142, 83, 0.5),
-        rgba(255, 167, 38, 0.5));
+    rgba(255, 107, 53, 0.5),
+    rgba(255, 142, 83, 0.5),
+    rgba(255, 167, 38, 0.5));
     border-radius: var(--radius-xl);
     z-index: -1;
     filter: blur(20px);
@@ -184,17 +186,17 @@ body::after {
 @keyframes logoGlow {
     0%, 100% {
         box-shadow:
-            var(--shadow-lg),
-            0 0 60px rgba(255, 107, 53, 0.5),
-            0 0 100px rgba(255, 142, 83, 0.3),
-            inset 0 0 20px rgba(255, 255, 255, 0.5);
+                var(--shadow-lg),
+                0 0 60px rgba(255, 107, 53, 0.5),
+                0 0 100px rgba(255, 142, 83, 0.3),
+                inset 0 0 20px rgba(255, 255, 255, 0.5);
     }
     50% {
         box-shadow:
-            var(--shadow-lg),
-            0 0 80px rgba(255, 107, 53, 0.7),
-            0 0 120px rgba(255, 142, 83, 0.5),
-            inset 0 0 30px rgba(255, 255, 255, 0.7);
+                var(--shadow-lg),
+                0 0 80px rgba(255, 107, 53, 0.7),
+                0 0 120px rgba(255, 142, 83, 0.5),
+                inset 0 0 30px rgba(255, 255, 255, 0.7);
     }
 }
 
@@ -263,9 +265,9 @@ body::after {
     position: absolute;
     inset: -2px;
     background: linear-gradient(135deg,
-        rgba(255, 107, 53, 0.6),
-        rgba(255, 142, 83, 0.6),
-        rgba(255, 167, 38, 0.6));
+    rgba(255, 107, 53, 0.6),
+    rgba(255, 142, 83, 0.6),
+    rgba(255, 167, 38, 0.6));
     border-radius: 28px;
     z-index: -1;
     filter: blur(15px);
@@ -285,9 +287,9 @@ body::after {
 .home-button:hover {
     transform: translateY(-6px) scale(1.05);
     box-shadow:
-        var(--shadow-float-hover),
-        0 0 40px rgba(255, 107, 53, 0.6),
-        0 0 60px rgba(255, 142, 83, 0.4);
+            var(--shadow-float-hover),
+            0 0 40px rgba(255, 107, 53, 0.6),
+            0 0 60px rgba(255, 142, 83, 0.4);
 }
 
 .home-button:active {
@@ -349,9 +351,9 @@ body::after {
     border-radius: var(--radius-lg);
     padding: var(--spacing-xl) var(--spacing-md) var(--spacing-lg);
     box-shadow:
-        var(--shadow-lg),
-        0 0 0 1px rgba(255, 255, 255, 0.1) inset,
-        0 0 40px rgba(255, 107, 53, 0.2);
+            var(--shadow-lg),
+            0 0 0 1px rgba(255, 255, 255, 0.1) inset,
+            0 0 40px rgba(255, 107, 53, 0.2);
     position: relative;
     z-index: 10;
     text-align: center;
@@ -368,9 +370,9 @@ body::after {
     position: absolute;
     inset: -2px;
     background: linear-gradient(135deg,
-        rgba(255, 107, 53, 0.3),
-        rgba(255, 142, 83, 0.3),
-        rgba(255, 167, 38, 0.3));
+    rgba(255, 107, 53, 0.3),
+    rgba(255, 142, 83, 0.3),
+    rgba(255, 167, 38, 0.3));
     border-radius: var(--radius-lg);
     z-index: -1;
     filter: blur(20px);
@@ -381,10 +383,10 @@ body::after {
 .profile-card:hover {
     transform: translateY(-8px) scale(1.02);
     box-shadow:
-        var(--shadow-xl),
-        0 0 0 1px rgba(255, 255, 255, 0.2) inset,
-        0 0 60px rgba(255, 107, 53, 0.4),
-        0 20px 40px rgba(0, 0, 0, 0.2);
+            var(--shadow-xl),
+            0 0 0 1px rgba(255, 255, 255, 0.2) inset,
+            0 0 60px rgba(255, 107, 53, 0.4),
+            0 20px 40px rgba(0, 0, 0, 0.2);
 }
 
 .profile-card:hover::before {
@@ -598,9 +600,9 @@ body::after {
     justify-content: space-around;
     align-items: center;
     box-shadow:
-        var(--shadow-float),
-        0 -1px 0 rgba(255, 255, 255, 0.5) inset,
-        0 0 40px rgba(255, 107, 53, 0.2);
+            var(--shadow-float),
+            0 -1px 0 rgba(255, 255, 255, 0.5) inset,
+            0 0 40px rgba(255, 107, 53, 0.2);
     z-index: 1000;
     border-radius: var(--radius-lg);
     border: 1px solid rgba(255, 255, 255, 0.6);
@@ -612,10 +614,10 @@ body::after {
     position: absolute;
     inset: -2px;
     background: linear-gradient(90deg,
-        rgba(255, 107, 53, 0.3),
-        rgba(255, 142, 83, 0.3),
-        rgba(255, 167, 38, 0.3),
-        rgba(255, 107, 53, 0.3));
+    rgba(255, 107, 53, 0.3),
+    rgba(255, 142, 83, 0.3),
+    rgba(255, 167, 38, 0.3),
+    rgba(255, 107, 53, 0.3));
     background-size: 200% 100%;
     border-radius: var(--radius-lg);
     z-index: -1;
