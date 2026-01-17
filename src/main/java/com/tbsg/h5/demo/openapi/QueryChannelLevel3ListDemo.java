@@ -1,16 +1,19 @@
 package com.tbsg.h5.demo.openapi;
 
 import com.alibaba.fastjson.JSON;
-import eleme.openapi.sdk.api.entity.alliance.ChannelLevel3CreateRequest;
+import eleme.openapi.sdk.api.entity.alliance.ChannelLevel3BatchResponse;
 import eleme.openapi.sdk.api.entity.alliance.ChannelLevel3Model;
-import eleme.openapi.sdk.api.entity.alliance.ChannelLevel3Response;
+import eleme.openapi.sdk.api.entity.alliance.ChannelLevel3QueryRequest;
 import eleme.openapi.sdk.api.exception.ServiceException;
 import eleme.openapi.sdk.api.service.AllianceService;
 import eleme.openapi.sdk.config.Config;
 import eleme.openapi.sdk.config.ElemeSdkLogger;
 import eleme.openapi.sdk.oauth.response.Token;
 
-public class CreateChannelLevel3Demo {
+import java.util.ArrayList;
+import java.util.List;
+
+public class QueryChannelLevel3ListDemo {
     public static void main(String[] args) {
         // 正式环境 Key、Secret 查看路径：管理中心-应用管理-查看应用-正式环境，https://open.shop.ele.me/manager/openapi/manage-center
         String appKey = "appKey";
@@ -45,35 +48,42 @@ public class CreateChannelLevel3Demo {
         AllianceService allianceService = new AllianceService(config, token);
 
         // 构建请求参数
-        ChannelLevel3CreateRequest request = new ChannelLevel3CreateRequest();
-        // 示例参数，请根据实际情况修改，接口文档：https://open.shop.ele.me/base/apilist/eleme-alliance/eleme-alliance-createChannelLevel3
-        request.setLevel1(1L);
-        request.setLevel2(2L);
-        request.setName("test_channel_name");
-        request.setDisplayName("测试渠道名称");
-        request.setChannel("test_channel_code");
-        request.setDescription("测试渠道描述");
-        request.setCreator("test_creator");
-        request.setStatus(1); // 1: 有效
+        ChannelLevel3QueryRequest channelLevel3QueryRequest = new ChannelLevel3QueryRequest();
+        // 示例参数，请根据实际情况修改，接口文档：https://open.shop.ele.me/base/apilist/eleme-alliance/eleme-alliance-queryChannelLevel3List
+        
+        // 通过渠道ID列表查询
+//        List<Long> channelIdList = new ArrayList<Long>();
+//        channelIdList.add(11L);
+//        channelIdList.add(22L);
+//        channelLevel3QueryRequest.setChannelIdList(channelIdList);
+        
+        // 通过渠道代码列表查询
+        List<String> channelList = new ArrayList<String>();
+        channelList.add("mobile.sdkdemo.1");
+        channelList.add("mobile.sdkdemo.2");
+        channelLevel3QueryRequest.setChannelList(channelList);
 
         try {
-            ChannelLevel3Response response = allianceService.createChannelLevel3(request);
+            ChannelLevel3BatchResponse response = allianceService.queryChannelLevel3List(channelLevel3QueryRequest);
             // 打印完整响应
             System.out.println("完整响应: " + JSON.toJSONString(response));
 
-            if (response != null && response.getResult() != null) {
-                ChannelLevel3Model model = response.getResult();
+            if (response != null && response.getResult() != null && !response.getResult().isEmpty()) {
+                List<ChannelLevel3Model> channelList3Models = response.getResult();
                 System.out.println("--------------------------------------------------");
-                System.out.println("创建成功，渠道详情如下：");
-                System.out.println("渠道ID: " + model.getId());
-                System.out.println("渠道名称: " + model.getName());
-                System.out.println("渠道代码: " + model.getChannel());
-                System.out.println("显示名称: " + model.getDisplayName());
-                System.out.println("状态: " + model.getStatus());
-                System.out.println("创建时间: " + model.getCreatedTime());
+                System.out.println("查询成功，共查询到 " + channelList3Models.size() + " 条渠道数据：");
+                for (ChannelLevel3Model model : channelList3Models) {
+                    System.out.println("---");
+                    System.out.println("渠道ID: " + model.getId());
+                    System.out.println("渠道名称: " + model.getName());
+                    System.out.println("渠道代码: " + model.getChannel());
+                    System.out.println("显示名称: " + model.getDisplayName());
+                    System.out.println("状态: " + model.getStatus());
+                    System.out.println("创建时间: " + model.getCreatedTime());
+                }
                 System.out.println("--------------------------------------------------");
             } else {
-                System.out.println("响应为空或未返回结果对象。");
+                System.out.println("未查询到任何渠道数据。");
             }
         } catch (ServiceException e) {
             throw new RuntimeException(e);
