@@ -53,12 +53,12 @@ public class QueryOrderInfoDemo {
 
         //   接口文档：https://open.shop.ele.me/base/apilist/eleme-alliance/eleme-alliance-queryOrderInfo
         List<Long> alscOrderNos = new ArrayList<>();
-        alscOrderNos.add(8012666117942909000L);
-        alscOrderNos.add(8025746100338902000L);
+        alscOrderNos.add(8012666117942909222L);
+//        alscOrderNos.add(8025746100338902000L);
         request.setAlscOrderNos(alscOrderNos);
 
         request.setChannelLevel2("mobile.sdkdemo");
-        request.setChannelLevel3("mobile.sdkdemo.001");
+        request.setChannelLevel3("mobile.sdkdemo.default");
 
         try {
             ChannelOrderInfoResponse response = allianceService.queryOrderInfo(request);

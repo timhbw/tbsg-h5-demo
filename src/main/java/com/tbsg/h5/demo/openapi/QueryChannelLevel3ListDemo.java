@@ -51,17 +51,16 @@ public class QueryChannelLevel3ListDemo {
         ChannelLevel3QueryRequest channelLevel3QueryRequest = new ChannelLevel3QueryRequest();
         // 示例参数，请根据实际情况修改，接口文档：https://open.shop.ele.me/base/apilist/eleme-alliance/eleme-alliance-queryChannelLevel3List
         
-        // 通过渠道ID列表查询
-//        List<Long> channelIdList = new ArrayList<Long>();
-//        channelIdList.add(11L);
-//        channelIdList.add(22L);
-//        channelLevel3QueryRequest.setChannelIdList(channelIdList);
+        // 优先通过渠道ID列表查询
+        List<Long> channelIdList = new ArrayList<Long>();
+        channelIdList.add(949972L);
+        channelLevel3QueryRequest.setChannelIdList(channelIdList);
         
         // 通过渠道代码列表查询
-        List<String> channelList = new ArrayList<String>();
-        channelList.add("mobile.sdkdemo.1");
-        channelList.add("mobile.sdkdemo.2");
-        channelLevel3QueryRequest.setChannelList(channelList);
+//        List<String> channelList = new ArrayList<String>();
+//        channelList.add("mobile.sdkdemo.1");
+//        channelList.add("mobile.sdkdemo.2");
+//        channelLevel3QueryRequest.setChannelList(channelList);
 
         try {
             ChannelLevel3BatchResponse response = allianceService.queryChannelLevel3List(channelLevel3QueryRequest);
@@ -74,9 +73,9 @@ public class QueryChannelLevel3ListDemo {
                 System.out.println("查询成功，共查询到 " + channelList3Models.size() + " 条渠道数据：");
                 for (ChannelLevel3Model model : channelList3Models) {
                     System.out.println("---");
-                    System.out.println("渠道ID: " + model.getId());
+                    System.out.println("三级渠道ID: " + model.getId());
                     System.out.println("渠道名称: " + model.getName());
-                    System.out.println("渠道代码: " + model.getChannel());
+                    System.out.println("三级渠道号: " + model.getChannel());
                     System.out.println("显示名称: " + model.getDisplayName());
                     System.out.println("状态: " + model.getStatus());
                     System.out.println("创建时间: " + model.getCreatedTime());

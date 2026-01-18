@@ -2,6 +2,7 @@ package com.tbsg.h5.demo.openapi;
 
 import com.alibaba.fastjson.JSON;
 import eleme.openapi.sdk.api.entity.alliance.BusinessParamModel;
+import eleme.openapi.sdk.api.entity.alliance.ChannelLevel3BatchResponse;
 import eleme.openapi.sdk.api.entity.alliance.ChannelLevel3BatchUpdateRequest;
 import eleme.openapi.sdk.api.entity.alliance.ChannelLevel3UpdateRequest;
 import eleme.openapi.sdk.api.exception.ServiceException;
@@ -51,39 +52,42 @@ public class UpdateChannelLevel3Demo {
 
         // 构建请求参数
         ChannelLevel3BatchUpdateRequest channelLevel3BatchUpdateRequest = new ChannelLevel3BatchUpdateRequest();
-        List<ChannelLevel3UpdateRequest> channelLevel3UpdateRequests = new ArrayList<ChannelLevel3UpdateRequest>();
-        
+        List<ChannelLevel3UpdateRequest> channelLevel3UpdateRequests = new ArrayList<>();
+
         ChannelLevel3UpdateRequest channelLevel3UpdateRequest = new ChannelLevel3UpdateRequest();
         // 示例参数，请根据实际情况修改，接口文档：https://open.shop.ele.me/base/apilist/eleme-alliance/eleme-alliance-updateChannelLevel3
-        channelLevel3UpdateRequest.setId(1L);
-        channelLevel3UpdateRequest.setName("员工餐饮-午餐");
-        channelLevel3UpdateRequest.setDisplayName("员工餐饮-午餐");
-        channelLevel3UpdateRequest.setChannel("mobile.guanaitongnew.lunch");
-        channelLevel3UpdateRequest.setDescription("系统添加");
+        channelLevel3UpdateRequest.setId(949972L);
+        channelLevel3UpdateRequest.setName("官方三级渠道测试-员工晚餐-修改");
+        channelLevel3UpdateRequest.setDisplayName("官方三级渠道测试-员工晚餐-修改");
+        channelLevel3UpdateRequest.setChannel("mobile.sdkdemo.three_channel_test_dinner");
+        channelLevel3UpdateRequest.setDescription("三级渠道描述-修改");
         channelLevel3UpdateRequest.setStatus(1);
-        
+
         // 设置业务参数
         BusinessParamModel businessParam = new BusinessParamModel();
-        Map<String, String> businessParams = new HashMap<String, String>();
+        Map<String, String> businessParams = new HashMap<>();
+        businessParams.put("checkoutAnnouncementTip", "{\"config\":\"{\\\"checkoutAnnouncementTip\\\":\\\"公告标题:公告的具体文案内容\\\"}\",\"functionCode\":\"checkoutAnnouncementTip\"}");
+
         businessParam.setBusinessParams(businessParams);
-        
-        List<String> ignoreBusinessCode = new ArrayList<String>();
-        ignoreBusinessCode.add("hideOrderAgain");
-        ignoreBusinessCode.add("hidePlatformSubsidies");
-        businessParam.setIgnoreBusinessCode(ignoreBusinessCode);
-        
         channelLevel3UpdateRequest.setBusinessParam(businessParam);
+
         channelLevel3UpdateRequests.add(channelLevel3UpdateRequest);
         channelLevel3BatchUpdateRequest.setChannelLevel3UpdateRequests(channelLevel3UpdateRequests);
 
         try {
-            allianceService.updateChannelLevel3(channelLevel3BatchUpdateRequest);
-            System.out.println("--------------------------------------------------");
-            System.out.println("更新成功！");
-            System.out.println("更新的渠道ID: " + channelLevel3UpdateRequest.getId());
-            System.out.println("更新的渠道名称: " + channelLevel3UpdateRequest.getName());
-            System.out.println("更新的渠道代码: " + channelLevel3UpdateRequest.getChannel());
-            System.out.println("--------------------------------------------------");
+            ChannelLevel3BatchResponse response = allianceService.updateChannelLevel3(channelLevel3BatchUpdateRequest);
+            System.out.println("完整响应: " + JSON.toJSONString(response));
+
+            if (response != null && response.getResult() != null) {
+                System.out.println("--------------------------------------------------");
+                System.out.println("更新成功！");
+                System.out.println("更新的三级渠道ID: " + channelLevel3UpdateRequest.getId());
+                System.out.println("更新的渠道名称: " + channelLevel3UpdateRequest.getName());
+                System.out.println("更新的三级渠道号: " + channelLevel3UpdateRequest.getChannel());
+                System.out.println("--------------------------------------------------");
+            } else {
+                System.out.println("更新失败！");
+            }
         } catch (ServiceException e) {
             throw new RuntimeException(e);
         }
