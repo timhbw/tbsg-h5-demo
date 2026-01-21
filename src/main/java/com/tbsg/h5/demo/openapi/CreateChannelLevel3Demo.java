@@ -11,10 +11,10 @@ import eleme.openapi.sdk.config.Config;
 import eleme.openapi.sdk.config.ElemeSdkLogger;
 import eleme.openapi.sdk.oauth.response.Token;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class CreateChannelLevel3Demo {
+
     public static void main(String[] args) {
         // 正式环境 Key、Secret 查看路径：管理中心-应用管理-查看应用-正式环境，https://open.shop.ele.me/manager/openapi/manage-center
         String appKey = "appKey";
@@ -62,20 +62,71 @@ public class CreateChannelLevel3Demo {
         // 后台展示的渠道名称(可以和name保持一致,C端不展示)
         request.setDisplayName("官方三级渠道测试-员工晚餐");
         // 三级渠道号，要求:字母小写、数字、下划线,二级渠道下保持唯一,C端不展示
-        request.setChannel("three_channel_test_dinner");
+        request.setChannel("three_channel_test_dinner3");
         request.setDescription("三级渠道描述");
         request.setCreator("system_creator");
         // 生效中:1、审批中:2、审批失败:3、待生效:4、已下线 5
         request.setStatus(1);
 
-        BusinessParamModel businessParam = new BusinessParamModel();
-        Map<String,String> businessParams = new HashMap<>();
-        businessParams.put("checkoutAnnouncementTip", "{\"config\":\"{\\\"checkoutAnnouncementTip\\\":\\\"公告标题:公告的具体文案内容\\\"}\",\"functionCode\":\"checkoutAnnouncementTip\"}");
+        // 设置业务参数 - 使用 BusinessParamBuilder 构建
+        // 前端只需传入简单的业务字段，Builder 负责转换为 SDK 需要的复杂格式
 
+        // 构建企业地址列表
+        BusinessParamBuilder.EnterpriseAddress address = new BusinessParamBuilder.EnterpriseAddress(
+                "1", "上海市普陀区", "近铁城市广场北区",
+                "3", "31.232823191373864", "121.38141609736105", "0"
+        );
+        address.setAddressCheckNotice("请确认收货人");
+        address.setPoiId("B0LAYUW7H2");
+
+        BusinessParamBuilder.EnterpriseAddress address2 = new BusinessParamBuilder.EnterpriseAddress(
+                "2", "澳门特别行政区", "石排郊野湾公园",
+                "3", "22.122676889125273", "113.56507922628968", "1"
+        );
+        address2.setAddressCheckNotice("请确认收货人");
+        address2.setPoiId("B073D00IID");
+
+        // 构建用餐时间限制配置（周一至周日 17:30-22:00）
+        Map<String, List<String[]>> weekTimeConfig = new HashMap<>();
+        List<String[]> lunchTimeSlots = new ArrayList<>();
+        lunchTimeSlots.add(new String[]{"17:30", "22:00"});
+        weekTimeConfig.put("monday", lunchTimeSlots);
+        weekTimeConfig.put("tuesday", lunchTimeSlots);
+        weekTimeConfig.put("wednesday", lunchTimeSlots);
+        weekTimeConfig.put("thursday", lunchTimeSlots);
+        weekTimeConfig.put("friday", lunchTimeSlots);
+        weekTimeConfig.put("saturday", lunchTimeSlots);
+        weekTimeConfig.put("sunday", lunchTimeSlots);
+
+        Map<String, String> businessParams = new BusinessParamBuilder()
+                // 1. 结算页公告配置
+                .withCheckoutAnnouncementTip("公告标题", "公告的具体文案内容")
+                // 2. 配送地址类型：enterprise (企业地址), personal (个人地址)
+                .withUseEnterpriseAddress("enterprise")
+                // 3. 企业地址详情（当配送地址类型为 enterprise 时必填）
+                .withEnterpriseAddressDetail(Arrays.asList(address, address2))
+                // 4. 预定单过滤：true (过滤/不支持预定), false (支持预定)
+                .withBookTimeTimeFilter(true)
+                // 5. 屏蔽到店自提：true (隐藏/屏蔽), false (展示)
+                .withHideTakeBySelf(true)
+                // 6. 用餐时间限制
+                .withOrderTimeLimit(weekTimeConfig)
+                // 7. 搜推召回规则
+                .withShopCallbackFlavor(Arrays.asList("209","3232","3240","212"))
+                // 8. 店铺展示规则（隐藏商品分类）
+                .withHideItemCategories(Arrays.asList("201839304", "201835105"))
+                .build();
+
+        BusinessParamModel businessParam = new BusinessParamModel();
+        // 使用强制类型转换，因为 SDK 定义的类型是 Map<String, String>，但实际需要的是 Map<String, Object>
+        // Java 泛型在运行时会被擦除，所以这种转换在运行时是安全的
         businessParam.setBusinessParams(businessParams);
         request.setBusinessParam(businessParam);
 
         try {
+            // 打印完整请求参数
+            System.out.println("完整请求: " + JSON.toJSONString(request));
+
             ChannelLevel3Response response = allianceService.createChannelLevel3(request);
             // 打印完整响应
             System.out.println("完整响应: " + JSON.toJSONString(response));
